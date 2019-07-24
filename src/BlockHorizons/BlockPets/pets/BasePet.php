@@ -236,7 +236,7 @@ abstract class BasePet extends Creature implements Rideable {
 	}
 
 	protected function sendSpawnPacket(Player $player): void {
-		$pk = new AddEntityPacket();
+		$pk = new AddActorPacket();
 		$pk->entityRuntimeId = $this->getId();
 		$pk->type = static::NETWORK_ID;
 		$pk->position = $this->asVector3();
@@ -865,7 +865,7 @@ abstract class BasePet extends Creature implements Rideable {
 				$link->bool1 = true;
 
 				if($entity instanceof Player) {
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link;
 					$entity->dataPacket($pk);
 
@@ -875,7 +875,7 @@ abstract class BasePet extends Creature implements Rideable {
 					$link_2->toEntityUniqueId = 0;
 					$link_2->bool1 = true;
 
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link_2;
 					$entity->dataPacket($pk);
 					unset($viewers[$entity->getLoaderId()]);
@@ -889,7 +889,7 @@ abstract class BasePet extends Creature implements Rideable {
 				$link->bool1 = true;
 
 				if($entity instanceof Player) {
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link;
 					$entity->dataPacket($pk);
 
@@ -899,7 +899,7 @@ abstract class BasePet extends Creature implements Rideable {
 					$link_2->toEntityUniqueId = 0;
 					$link_2->bool1 = true;
 
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link_2;
 					$entity->dataPacket($pk);
 					unset($viewers[$entity->getLoaderId()]);
@@ -910,7 +910,7 @@ abstract class BasePet extends Creature implements Rideable {
 		}
 
 		if(!empty($viewers)) {
-			$pk = new SetEntityLinkPacket();
+			$pk = new SetActorLinkPacket();
 			$pk->link = $link;
 			$this->server->broadcastPacket($viewers, $pk);
 		}
@@ -940,7 +940,7 @@ abstract class BasePet extends Creature implements Rideable {
 				$link->bool1 = true;
 
 				if($entity instanceof Player) {
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link;
 					$entity->dataPacket($pk);
 
@@ -950,7 +950,7 @@ abstract class BasePet extends Creature implements Rideable {
 					$link_2->toEntityUniqueId = 0;
 					$link_2->bool1 = true;
 
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link_2;
 					$entity->dataPacket($pk);
 					unset($viewers[$entity->getLoaderId()]);
@@ -964,7 +964,7 @@ abstract class BasePet extends Creature implements Rideable {
 				$link->bool1 = true;
 
 				if($entity instanceof Player) {
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link;
 					$entity->dataPacket($pk);
 
@@ -974,7 +974,7 @@ abstract class BasePet extends Creature implements Rideable {
 					$link_2->toEntityUniqueId = 0;
 					$link_2->bool1 = true;
 
-					$pk = new SetEntityLinkPacket();
+					$pk = new SetActorLinkPacket();
 					$pk->link = $link_2;
 					$entity->dataPacket($pk);
 					unset($viewers[$entity->getLoaderId()]);
@@ -987,7 +987,7 @@ abstract class BasePet extends Creature implements Rideable {
 		unset($this->links[$type]);
 
 		if(!empty($viewers)) {
-			$pk = new SetEntityLinkPacket();
+			$pk = new SetActorLinkPacket();
 			$pk->link = $link;
 			$this->server->broadcastPacket($viewers, $pk);
 		}
