@@ -25,3 +25,6 @@ We'd like to keep our issue tracker as clean as possible, so please take the fol
 
 ### Wiki
 Please refer to [BlockPets' wiki](https://github.com/BlockHorizons/BlockPets/wiki) for help with features, translations, commands and permissions.
+
+
+Update the new protocol in Pocketmine-MP version 3.9.2
