@@ -35,9 +35,18 @@ class PetInventoryManager {
 
 	public function __construct(BasePet $pet) {
 		$this->pet = $pet;
-		$this->menu = InvMenu::create(InvMenu::TYPE_CUSTOM, PetInventory::class);
+		$this->menu = InvMenu::create(InvMenu::TYPE_DOUBLE_CHEST);
+		$this->menu->setInventoryCloseListener(function(Player $player) : void{
+		parent::onClose($player);
+		$peta = $pet->getPet();
+		$loader = $peta->getLoader();
+		if($loader->getBlockPetsConfig()->storeToDatabase()) {
+			$loader->getDatabase()->updateInventory($peta);
+		}
+
+            });
 		$this->setName($pet->getPetName());
-		$this->getInventory()->setManager($this);
+		//$this->getInventory()->setManager($this);
 	}
 
 	public function setName(string $name): void {
@@ -48,7 +57,7 @@ class PetInventoryManager {
 		return $this->pet;
 	}
 
-	public function getInventory(): PetInventory {
+	public function getInventory() {
 		return $this->menu->getInventory();
 	}
 

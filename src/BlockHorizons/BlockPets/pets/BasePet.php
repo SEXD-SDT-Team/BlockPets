@@ -435,7 +435,7 @@ abstract class BasePet extends Creature implements Rideable {
 	 *
 	 * @return PetInventory
 	 */
-	public function getInventory(): PetInventory {
+	public function getInventory() {
 		return $this->inventory_manager->getInventory();
 	}
 
@@ -576,6 +576,9 @@ abstract class BasePet extends Creature implements Rideable {
 		if(!parent::onUpdate($currentTick) && $this->isClosed()) {
 			return false;
 		}
+		if(floor($this->y) < 0){
+
+		}
 		if($this->isRiding()) {
 			$petOwner = $this->getPetOwner();
 
@@ -602,6 +605,9 @@ abstract class BasePet extends Creature implements Rideable {
 			if(!$this->isDormant() && ($this->getLevel()->getEntity($petOwner->getId()) === null || $this->distance($petOwner) >= 50)) {
 				$this->teleport($petOwner);
 				return true;
+			}
+			if(!$this->isDormant() && floor($this->y) < 0){
+				$this->teleport($petOwner);
 			}
 			++$this->positionSeekTick;
 			if($this->shouldFindNewPosition()) {
